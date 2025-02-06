@@ -16,7 +16,7 @@ export type LocationDataType = (typeof locationsData)[number];
 
 export default function ProjectsTable() {
   const [projects, setProjects] = useState<ProjectsTableDataType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { table, setData } = useTanStackTable<ProjectsTableDataType>({
     tableData: projects,
@@ -47,8 +47,10 @@ export default function ProjectsTable() {
       const getProjects = async () => {
         try {
           const projectsData = await fetchProjects();
+          console.log(projectsData)
           getDevelopers(projectsData.data);
         } catch (error) {
+          console.log(error)
           setError('Failed to fetch projects');
         }
       };
@@ -56,16 +58,19 @@ export default function ProjectsTable() {
       const getDevelopers = async (projectsData: ProjectsTableDataType[]) => {
         try {
           const developersData = await fetchDevelopers();
+          console.log(developersData)
           //const developersMap = new Map(developersData.data.map((dev: DevsTableDataType) => [dev.id, dev.name]));
           const updatedProjects = projectsData.map((project: ProjectsTableDataType) => {
             const developer = developersData.data.find((dev: DevsTableDataType) => dev.id === project.developer_id);
             return {
               ...project,
-              developer_name: developer.name ? developer.name : 'Unknown Developer',
+              developer_name: developer?.name ? developer?.name : 'Unknown Developer',
             };
           });
+          console.log(updatedProjects)
           getLocations(updatedProjects);
         } catch (devsError) {
+          console.log(devsError)
           setError('Failed to fetch developers');
         } 
       };

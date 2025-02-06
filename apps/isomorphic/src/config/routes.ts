@@ -99,6 +99,9 @@ export const routes = {
   properties: {
     dashboard:'/properties',
   },
+  test:{
+    dashboard:'/test'
+  },
   analytics: '/analytics',
   financial: {
     dashboard: '/financial',

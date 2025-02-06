@@ -45,6 +45,7 @@ export default function FeaturesTable() {
       const getFeatures = async () => {
         try {
           const featuresData = await fetchFeatures();
+          console.log('featuresData:',featuresData)
           setFeatures(featuresData.data);
         } catch (error) {
           setError('Failed to fetch features');

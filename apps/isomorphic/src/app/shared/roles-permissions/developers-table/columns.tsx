@@ -54,7 +54,10 @@ export const devsColumns = [
     id: 'phone',
     size: 150,
     header: 'phone',
-    cell: ({ row }) => row.original.phone_number,
+    cell: ({ row }) => {
+      row.original.phone_number
+      console.log('row', row)
+    },
   }),
   columnHelper.accessor('website', {
     id: 'website',
@@ -81,7 +84,9 @@ export const devsColumns = [
     id: 'createdAt',
     size: 200,
     header: 'Created',
-    cell: ({ row }) => getFormattedDateString(row.original.created_at)
+    cell: ({ row }) =>{
+      console.log('rrrrrrrrrrrrrrrrr',row) 
+      getFormattedDateString(row.original.created_at)}
   }),
   columnHelper.display({
     id: 'action',
@@ -93,8 +98,10 @@ export const devsColumns = [
       },
     }) => (
       <TableRowActionGroup
+        id={row.original.developer_id} 
+        baseRoute="re-developers"
         deletePopoverTitle={`Delete this developer`}
-        deletePopoverDescription={`Are you sure you want to delete this #${row.original.id} developer?`}
+        deletePopoverDescription={`Are you sure you want to delete this #${row.original.developer_id} developer?`}
         onDelete={() => meta?.handleDeleteRow?.(row.original)}
       />
     ),

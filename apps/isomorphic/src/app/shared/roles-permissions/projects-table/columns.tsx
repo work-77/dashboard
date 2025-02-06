@@ -158,7 +158,10 @@ export const projectsColumns = [
     id: 'project_size',
     size: 100,
     header: 'Project Size',
-    cell: ({ row }) => row.original.project_size,
+    cell: ({ row }) => {
+      row.original.project_size,
+      console.log(row)
+    },
   }),
   columnHelper.display({
     id: 'action',
@@ -170,6 +173,8 @@ export const projectsColumns = [
       },
     }) => (
       <TableRowActionGroup
+      id={row.original.project_id} 
+      baseRoute="re-projects"
         deletePopoverTitle={`Delete this project`}
         deletePopoverDescription={`Are you sure you want to delete this #${row.original.project_id} project?`}
         onDelete={() => meta?.handleDeleteRow?.(row.original)}

@@ -60,6 +60,8 @@ export const featuresColumns = [
       },
     }) => (
       <TableRowActionGroup
+        id={row.original.id} 
+        baseRoute="features"
         deletePopoverTitle={`Delete this feature`}
         deletePopoverDescription={`Are you sure you want to delete this #${row.original.id} project?`}
         onDelete={() => meta?.handleDeleteRow?.(row.original)}

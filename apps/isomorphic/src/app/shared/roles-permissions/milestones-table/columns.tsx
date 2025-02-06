@@ -132,6 +132,7 @@ export const projectsColumns = [
       },
     }) => (
       <TableRowActionGroup
+      id={row.original.project_id} 
         deletePopoverTitle={`Delete this project`}
         deletePopoverDescription={`Are you sure you want to delete this #${row.original.project_id} project?`}
         onDelete={() => meta?.handleDeleteRow?.(row.original)}

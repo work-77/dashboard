@@ -60,6 +60,8 @@ export const locationsColumns = [
       },
     }) => (
       <TableRowActionGroup
+      id={row.original.location_id}
+      baseRoute="locations" 
         deletePopoverTitle={`Delete this location`}
         deletePopoverDescription={`Are you sure you want to delete this #${row.original.location_id} project?`}
         onDelete={() => meta?.handleDeleteRow?.(row.original)}

@@ -104,6 +104,11 @@ export const menuItems = [
     href: routes.DLDAreas.dashboard,
     icon: <PiBinocularsDuotone />,
   },
+  {
+    name: 'Test',
+    href: routes.test.dashboard,
+    icon: <PiFolderDuotone />,
+  },
   // {
   //   name: 'File Manager',
   //   href: '/',

@@ -8,20 +8,29 @@ import cn from "@core/utils/class-names";
 import DeletePopover from "../delete-popover";
 
 export default function TableRowActionGroup({
+  id,
   onDelete,
-  editUrl = "#",
-  viewUrl = "#",
-  deletePopoverTitle = "Delete the appointment",
+  baseRoute = "",
+  editUrl,
+  viewUrl,
+  deletePopoverTitle = "Delete the item",
   deletePopoverDescription = "Are you sure you want to delete this item?",
   className,
 }: {
+  id?: string | number; // Make id optional, but log a warning if missing
   onDelete?: () => void;
+  baseRoute?: string; 
   editUrl?: string;
   viewUrl?: string;
   deletePopoverTitle?: string;
   deletePopoverDescription?: string;
   className?: string;
 }) {
+
+  // Provide fallback for editUrl and viewUrl if id is undefined
+  const finalEditUrl = editUrl || (id ? `/${baseRoute}/${baseRoute}-edit/${id}` : "#");
+  const finalViewUrl = viewUrl || (id ? `/${baseRoute}/${baseRoute}-view/${id}` : "#");
+
   return (
     <Flex
       align="center"
@@ -30,7 +39,8 @@ export default function TableRowActionGroup({
       className={cn("pe-3", className)}
     >
       <Tooltip size="sm" content="Edit Item" placement="top" color="invert">
-        <Link href={editUrl}>
+    
+        <Link href={finalEditUrl}>
           <ActionIcon
             as="span"
             size="sm"
@@ -42,7 +52,7 @@ export default function TableRowActionGroup({
         </Link>
       </Tooltip>
       <Tooltip size="sm" content="View Item" placement="top" color="invert">
-        <Link href={viewUrl}>
+        <Link href={finalViewUrl}>
           <ActionIcon
             as="span"
             size="sm"

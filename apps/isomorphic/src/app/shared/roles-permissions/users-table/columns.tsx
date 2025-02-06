@@ -86,7 +86,10 @@ export const usersColumns = [
     size: 150,
     header: 'Status',
     enableSorting: false,
-    cell: ({ row }) => getStatusBadge(row.original.status),
+    cell: ({ row }) => {
+      getStatusBadge(row.original.status),
+        console.log(row)
+    },
   }),
   columnHelper.display({
     id: 'action',
@@ -98,6 +101,8 @@ export const usersColumns = [
       },
     }) => (
       <TableRowActionGroup
+        id={row.original.id}
+        baseRoute="users"
         deletePopoverTitle={`Delete this user`}
         deletePopoverDescription={`Are you sure you want to delete this #${row.original.id} user?`}
         onDelete={() => meta?.handleDeleteRow?.(row.original)}
