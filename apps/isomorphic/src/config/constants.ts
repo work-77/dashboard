@@ -1,4 +1,4 @@
-export const API_URL1='http://192.168.1.119/realstateproject/public/api';
+export const API_URL1='http://192.168.1.119/realstateproject/public/api/dashboard';
 export const API_URL2='http://192.168.1.203/realestateprojecte/public/api';
 export const CART_KEY = 'isomorphic-cart';
 export const POS_CART_KEY = 'isomorphic-pos-cart';

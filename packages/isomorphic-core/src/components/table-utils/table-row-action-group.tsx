@@ -6,29 +6,28 @@ import { ActionIcon, Flex, Tooltip } from "rizzui";
 import Link from "next/link";
 import cn from "@core/utils/class-names";
 import DeletePopover from "../delete-popover";
+import ActionIconWithModal from "../EditIconWithModal";
 
 export default function TableRowActionGroup({
   id,
   onDelete,
   baseRoute = "",
-  editUrl,
+  viewComponent,
   viewUrl,
   deletePopoverTitle = "Delete the item",
   deletePopoverDescription = "Are you sure you want to delete this item?",
   className,
 }: {
-  id?: string | number; // Make id optional, but log a warning if missing
+  id?: string | number;
   onDelete?: () => void;
-  baseRoute?: string; 
-  editUrl?: string;
+  baseRoute?: string;
+  viewComponent: React.ReactNode;
   viewUrl?: string;
   deletePopoverTitle?: string;
   deletePopoverDescription?: string;
   className?: string;
 }) {
 
-  // Provide fallback for editUrl and viewUrl if id is undefined
-  const finalEditUrl = editUrl || (id ? `/${baseRoute}/${baseRoute}-edit/${id}` : "#");
   const finalViewUrl = viewUrl || (id ? `/${baseRoute}/${baseRoute}-view/${id}` : "#");
 
   return (
@@ -39,17 +38,21 @@ export default function TableRowActionGroup({
       className={cn("pe-3", className)}
     >
       <Tooltip size="sm" content="Edit Item" placement="top" color="invert">
-    
-        <Link href={finalEditUrl}>
-          <ActionIcon
-            as="span"
-            size="sm"
-            variant="outline"
-            aria-label="Edit Item"
-          >
-            <PencilIcon className="size-4" />
-          </ActionIcon>
-        </Link>
+
+      <ActionIconWithModal
+        modalTitle="Edit Item"
+        viewComponent={viewComponent}
+      />
+        {/* <ActionIcon
+          as="span"
+          size="sm"
+          variant="outline"
+          aria-label="Edit Item"
+          onClick={}
+        >
+          <PencilIcon className="size-4" />
+        </ActionIcon> */}
+
       </Tooltip>
       <Tooltip size="sm" content="View Item" placement="top" color="invert">
         <Link href={finalViewUrl}>

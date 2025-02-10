@@ -7,8 +7,10 @@ import { DevsTableDataType } from '.';
 import { getStatusBadge } from '@core/components/table-utils/get-status-badge';
 import TableRowActionGroup from '@core/components/table-utils/table-row-action-group';
 import { getFormattedDateString } from '@core/utils/get-formatted-date';
+import EditDeveloper from '../edit-developer';
+import { DeveloperDataType } from '../roles-permissions.types';
 
-const columnHelper = createColumnHelper<DevsTableDataType>();
+const columnHelper = createColumnHelper<DeveloperDataType>();
 
 export const devsColumns = [
   columnHelper.display({
@@ -35,7 +37,7 @@ export const devsColumns = [
     id: 'id',
     size: 100,
     header: 'ID',
-    cell: ({ row }) => <>#{row.original.id}</>,
+    cell: ({ row }) => <>#{row.original.developer_id}</>,
   }),
   columnHelper.accessor('name', {
     id: 'fullName',
@@ -99,6 +101,7 @@ export const devsColumns = [
     }) => (
       <TableRowActionGroup
         id={row.original.developer_id} 
+        viewComponent={<EditDeveloper  developerId={row.original.developer_id} />}
         baseRoute="re-developers"
         deletePopoverTitle={`Delete this developer`}
         deletePopoverDescription={`Are you sure you want to delete this #${row.original.developer_id} developer?`}

@@ -1,69 +1,76 @@
-import { API_URL2 as API_URL } from '@/config/constants';
+import { AreasDataType, DeveloperDataType, ProjectDataType } from '@/app/shared/roles-permissions/roles-permissions.types';
+import { API_URL1 as API_URL, API_URL2 } from '@/config/constants';
 import axios from 'axios'
 
-export const fetchProjects = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/projects`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-      throw error;
-    }
-  };
-  
-export const fetchLocations = async () => {
-try {
-    const response = await axios.get(`${API_URL}/locations`);
+const apiClient = axios.create({
+  baseURL: API_URL || API_URL2,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+const handleError = (error: any, endpoint: string) => {
+  console.error(`Error with ${endpoint}:`, error);
+  throw error;
+};
+
+const fetchData = async (endpoint: string) => {
+  try {
+    const response = await apiClient.get(endpoint);
     return response.data;
-} catch (error) {
-    console.error('Error fetching locations:', error);
-    throw error;
-}
+  } catch (error) {
+    handleError(error, endpoint);
+  }
 };
 
-export const fetchFeatures = async () => {
+const postData = async (endpoint: string, data: any) => {
   try {
-      const response = await axios.get(`${API_URL}/features`);
-      return response.data;
-  } catch (error) {
-      console.error('Error fetching features:', error);
-      throw error;
-  }
-  };
-
-export const fetchDevelopers = async () => {
-try {
-    const response = await axios.get(`${API_URL}/developers`);
+    const response = await apiClient.post(endpoint, data);
     return response.data;
-} catch (error) {
-    console.error('Error fetching developers:', error);
-    throw error;
-}
-};
-
-export const addDeveloper = async (developerData: {
-  name: string;
-  email: string;
-  phone_number: string;
-  website?: string;
-  description?: string;
-  status: string;
-}) => {
-  try {
-    const response = await axios.post(`${API_URL}/developers`, developerData);
-    return response.data; // Return the created developer
   } catch (error) {
-    console.error('Error adding developer:', error);
-    throw error;
+    handleError(error, endpoint);
   }
 };
 
-export const addProject = async (projectData: any) => {
+const editData = async (endpoint: string, data: any) => {
   try {
-    const response = await axios.post(`${API_URL}/projects`, projectData);
-    return response.data; // Return the created developer
+    const response = await apiClient.put(endpoint, data);
+    return response.data;
   } catch (error) {
-    console.error('Error adding project:', error);
-    throw error;
+    handleError(error, endpoint);
   }
 };
+
+// FETCH DATA
+export const fetchProjects = () => fetchData('/projects');
+export const fetchLocations = () => fetchData('/locations');
+export const fetchFeatures = () => fetchData('/features');
+export const fetchDevelopers = () => fetchData('/developers');
+export const fetchAreas = () => fetchData('/areas');
+export const fetchAddresses = () => fetchData('/addresses');
+export const fetchMileStones = () => fetchData('/milestones');
+export const fetchReviews = () => fetchData('/reviews');
+export const fetchReservations = () => fetchData('/reservations');
+export const fetchDeveloperFeatures = () => fetchData('/developer-features');
+export const fetchDLDAreas = () => fetchData('/dldareas');
+export const fetchCharts = () => fetchData('/charts');
+export const fetchAreaDetails = (areaId: number) => fetchData(`/areas/${areaId}`);
+
+// POST DATA
+export const addDeveloper = (developerData: DeveloperDataType) => postData('/developers', developerData);
+export const addProject = (projectData: ProjectDataType) => postData('/projects', projectData);
+
+// EDIT DATA
+export const editDeveloper = (developerId: number, developerData: DeveloperDataType) =>
+  editData(`/developers/${developerId}`, developerData);
+
+export const editProject = (projectId: number, projectData: ProjectDataType) =>
+  editData(`/projects/${projectId}`, projectData);
+
+export const editArea = (areaId: number, areaData: AreasDataType) =>
+  editData(`/areas/${areaId}`, areaData);
+
+
+
+// DELETE DATA
+

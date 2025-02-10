@@ -2,7 +2,7 @@
 export default function page() {
   return (
     <div>
-      dld-areas
+      mile stones
     </div>
   )
 }

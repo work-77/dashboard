@@ -87,6 +87,9 @@ export const routes = {
   DLDAreas: {
     dashboard: '/dld-areas',
   },
+  areas: {
+    dashboard: '/areas',
+  },
   locations: {
     dashboard: '/locations',
   },
@@ -99,8 +102,20 @@ export const routes = {
   properties: {
     dashboard:'/properties',
   },
-  test:{
-    dashboard:'/test'
+  MileStones:{
+    dashboard: '/mile-stones'
+  },
+  reviews:{
+    dashboard:'/reviews'
+  },
+  reservations: {
+    dashboard:'/reservations'
+  },
+  DeveloperFeatures: {
+    dashboard:'/developer-features'
+  },
+  charts: {
+    dashboard: '/charts'
   },
   analytics: '/analytics',
   financial: {

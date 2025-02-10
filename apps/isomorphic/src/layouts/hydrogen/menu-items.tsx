@@ -6,6 +6,7 @@ import {
   PiArrowsOutLineHorizontalDuotone,
   PiBellSimpleRingingDuotone,
   PiBinocularsDuotone,
+  PiBookmarkSimpleDuotone,
   PiBriefcaseDuotone,
   PiBrowserDuotone,
   PiCalendarDuotone,
@@ -56,6 +57,8 @@ import {
   PiUserGearDuotone,
   PiUserPlusDuotone,
 } from 'react-icons/pi';
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { MdReviews } from 'react-icons/md';
 
 // Note: do not add href in the label object, it is rendering as label
 export const menuItems = [
@@ -100,15 +103,40 @@ export const menuItems = [
     icon: <PiMapPinLineDuotone />,
   },
   {
+    name: 'Areas',
+    href: routes.areas.dashboard,
+    icon: <FaMapMarkerAlt />,
+  },
+  {
     name: 'DLD Areas',
     href: routes.DLDAreas.dashboard,
     icon: <PiBinocularsDuotone />,
   },
   {
-    name: 'Test',
-    href: routes.test.dashboard,
-    icon: <PiFolderDuotone />,
+    name: 'Mile Stones',
+    href: routes.MileStones.dashboard,
+    icon: <PiBinocularsDuotone />,
   },
+  {
+    name:'Reviews',
+    href: routes.reviews.dashboard,
+    icon: <MdReviews />
+  },
+  {
+    name: 'Reservations',
+    href: routes.reservations.dashboard,
+    icon: <PiBookmarkSimpleDuotone />
+  },
+  {
+    name:'Developer Features',
+    href: routes.DeveloperFeatures.dashboard,
+    icon: <PiFolderDuotone />
+  },
+  {
+    name:'Charts',
+    href: routes.charts.dashboard,
+    icon: <PiChartBarDuotone />
+  }
   // {
   //   name: 'File Manager',
   //   href: '/',
